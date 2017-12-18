@@ -1,0 +1,574 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.6.6
+-- Dumped by pg_dump version 9.6.6
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: articles; Type: TABLE; Schema: public; Owner: kirill
+--
+
+CREATE TABLE articles (
+    id integer NOT NULL,
+    title character varying,
+    author character varying,
+    hubs character varying,
+    date character varying
+);
+
+
+ALTER TABLE articles OWNER TO kirill;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE; Schema: public; Owner: kirill
+--
+
+CREATE SEQUENCE articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE articles_id_seq OWNER TO kirill;
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kirill
+--
+
+ALTER SEQUENCE articles_id_seq OWNED BY articles.id;
+
+
+--
+-- Name: authors; Type: TABLE; Schema: public; Owner: kirill
+--
+
+CREATE TABLE authors (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE authors OWNER TO kirill;
+
+--
+-- Name: authors_id_seq; Type: SEQUENCE; Schema: public; Owner: kirill
+--
+
+CREATE SEQUENCE authors_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE authors_id_seq OWNER TO kirill;
+
+--
+-- Name: authors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kirill
+--
+
+ALTER SEQUENCE authors_id_seq OWNED BY authors.id;
+
+
+--
+-- Name: hubs; Type: TABLE; Schema: public; Owner: kirill
+--
+
+CREATE TABLE hubs (
+    id integer NOT NULL,
+    name character varying
+);
+
+
+ALTER TABLE hubs OWNER TO kirill;
+
+--
+-- Name: hubs_id_seq; Type: SEQUENCE; Schema: public; Owner: kirill
+--
+
+CREATE SEQUENCE hubs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE hubs_id_seq OWNER TO kirill;
+
+--
+-- Name: hubs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: kirill
+--
+
+ALTER SEQUENCE hubs_id_seq OWNED BY hubs.id;
+
+
+--
+-- Name: articles id; Type: DEFAULT; Schema: public; Owner: kirill
+--
+
+ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
+
+
+--
+-- Name: authors id; Type: DEFAULT; Schema: public; Owner: kirill
+--
+
+ALTER TABLE ONLY authors ALTER COLUMN id SET DEFAULT nextval('authors_id_seq'::regclass);
+
+
+--
+-- Name: hubs id; Type: DEFAULT; Schema: public; Owner: kirill
+--
+
+ALTER TABLE ONLY hubs ALTER COLUMN id SET DEFAULT nextval('hubs_id_seq'::regclass);
+
+
+--
+-- Data for Name: articles; Type: TABLE DATA; Schema: public; Owner: kirill
+--
+
+COPY articles (id, title, author, hubs, date) FROM stdin;
+1	Пускаю слюни, пишу код	MagisterLudi	Блог компании Philtech-акселератор,	2017-12-12
+2	Назови мне свою зарплату, и я скажу кто ты	SergioPredatore	Управление персоналом,	2017-12-17
+3	Критика 1С	terrib1ekeyn	1С-Битрикс,	2017-12-13
+4	Почему компания меня потеряла	swh	Управление персоналом,	2017-12-15
+5	Грязные трюки и оперативка	PatientZero	Программирование,	2017-12-16
+6	Как мы создавали менеджер паролей со стойкой криптографией и мастер-паролем. Опыт команды Яндекс.Браузера	BarakAdama	Блог компании Яндекс,	2017-12-12
+7	Криптография русского крестьянина	PatientZero	Криптография,	2017-12-14
+8	Рожденный перехватывать трафик	Shapelez	Блог компании Qrator Labs,	2017-12-13
+9	Руководство по написанию защищённых PHP-приложений в 2018-м	AloneCoder	Блог компании Mail.Ru Group,	2017-12-15
+10	Суррогаты	nmivan	Анализ и проектирование систем,	2017-12-15
+11	Загоним мамонта в яму: как провести презентацию, чтобы вас услышали и запомнили	Shumina	Блог компании ГК ЛАНИТ,	2017-12-12
+12	Как строился дата-центр в сейсмоопасном регионе (этот разрушится последним в городе, если что)	Pvashkevich	Блог компании КРОК,	2017-12-13
+13	Анализ резюме HH.RU: много графиков и немного сексизма и дискриминации	shurik2533	Блог компании HeadHunter,	2017-12-18
+14	RFC для слабаков или история одного расследования	larrabee	*nix,	2017-12-16
+15	Делаем адаптивный HTML, добавляя одну строку в CSS	rishat_edison	Блог компании Edison,	2017-12-16
+16	Ускорение сборки C и C++ проектов	khandeliants	Блог компании PVS-Studio,	2017-12-12
+17	Интеграция — байки	AnIvanov	Блог компании КРОК,	2017-12-12
+18	Противоестественная диагностика	mviorno	Блог компании DevExpress,	2017-12-12
+19	Постигаем Си глубже, используя ассемблер	SendMess	Assembler,	2017-12-17
+20	6 привычек проектного бизнеса, которые убивают продуктовый	friifond	Блог компании Фонд развития интернет-инициатив,	2017-12-15
+21	Нехватка оперативной памяти в Linux на рабочем ПК: оптимизация и действия при зависании	specblog	*nix,	2017-12-15
+22	Vivaldi Sync — первое знакомство	Shpankov	Блог компании Vivaldi Technologies AS,	2017-12-13
+23	Scrum внедрили, agile — забыли	vryashentsev	Agile,	2017-12-16
+24	Как в Интернете проверить автомобиль перед покупкой: используем доступные базы данных и логику	Cloud4Y	Блог компании Cloud4Y,	2017-12-12
+25	30-часовой хакатон Яндекс.Погоды, или как предсказать осадки по сигналам от пользователей	Leono	Блог компании Яндекс,	2017-12-13
+26	Нескучный API	nosterx	API,	2017-12-15
+27	История Илона Маска – Инфографика	zarytskiy	Бизнес-модели,	2017-12-15
+28	Нацеленное скликивание рекламного бюджета в Я.Директ	Bel0g0r	Законодательство и IT-бизнес,	2017-12-11
+29	PVS-Studio 2018: CWE, Java, RPG, macOS, Keil, IAR, MISRA	Andrey2008	Блог компании PVS-Studio,	2017-12-14
+30	Как теория ограничений помогает зарабатывать больше — личный опыт Логомашины	Logomachine	Блог компании Логомашина,	2017-12-15
+31	Как работает «МЕГА Белая Дача»: открываем ТЦ с другой стороны	MEGA_Accelerator	Блог компании МЕГА Accelerator,	2017-12-12
+32	Продвижение ПО на Запад: ожидание vs.реальность на примере одного видеоредактора	Gerente_Capaz	Growth Hacking,	2017-12-12
+33	Как правильно чистить лук, или Почему разработка ПО выходит из-под контроля	alconost	Блог компании Alconost,	2017-12-14
+34	Airflow Workshop: сложные DAG’и без костылей	diiina	Блог компании Mail.Ru Group,	2017-12-11
+35	Обнаружение аномалий в данных сетевого мониторинга методами статистики	little-brother	Алгоритмы,	2017-12-15
+36	Конструирование сайта, защищенного от блокировок	nnseva	IT-инфраструктура,	2017-12-12
+37	[DotNetBook] Структура экземпляров типов и VMT	sidristij	.NET,	2017-12-13
+38	Kubernetes 1.9: обзор основных новшеств	distol	Блог компании Флант,	2017-12-13
+39	SOC for beginners. Как организовать мониторинг инцидентов и реагирование на атаки в режиме 24х7	SolarSecurity	Блог компании Solar Security,	2017-12-14
+40	Советы по созданию современного Android-приложения. Лекция Яндекса	Leono	Блог компании Яндекс,	2017-12-17
+41	Анонс HolyJS 2018 Piter: как 1988-й сказывается на 2018-м	phillennium	Блог компании JUG.ru Group,	2017-12-15
+42	Управление зависимостями в PHP	AloneCoder	Блог компании Mail.Ru Group,	2017-12-12
+43	История победы на международном соревновании по распознаванию документов команды компании SmartEngines	SmartEngines	Блог компании Smart Engines,	2017-12-14
+44	Зависимости наших зависимостей или несколько слов об уязвимости наших проектов	Drag13	JavaScript,	2017-12-14
+45	Развертываем Parallels RAS в Microsoft Azure за полчаса	Cheburator2033	Блог компании Parallels,	2017-12-14
+46	Be my burger	ru_vds	Блог компании RUVDS.com,	2017-12-15
+47	«Я всегда должен быть на виду» — Интервью с Олегом Шелаевым из ZeroTurnaround (часть 1)	23derevo	Блог компании JUG.ru Group,	2017-12-14
+48	Двоичный поиск в графах	PatientZero	Алгоритмы,	2017-12-13
+49	Сверточная сеть на python. Часть 2. Вывод формул для обучения модели	befuddle	Блог компании Open Data Science,	2017-12-18
+50	Ошибка на сайте… Что делать?	ru_vds	Блог компании RUVDS.com,	2017-12-14
+51	Дизайн–система Acronis. Часть вторая. Иконки, SVG шрифты, Gulp	Nikishkin	Блог компании Acronis, Inc,	2017-12-12
+52	Чем страдает бизнес?	Axelus	Блог компании RegionSoft Developer Studio,	2017-12-13
+53	Микроядро vs. монолит и «торжество» MINIX	temujin	Open source,	2017-12-15
+54	Синглтон, локатор сервисов и тесты в iOS	KAIIIAJIOT	Блог компании Badoo,	2017-12-14
+55	Туториал по Unreal Engine. Часть 3: материалы	PatientZero	Unreal Engine,	2017-12-15
+56	Туториал по Unreal Engine. Часть 4: UI	PatientZero	Unreal Engine,	2017-12-17
+57	Это Спарта	nmivan	Управление продуктом,	2017-12-14
+58	Эксперименты с контрактами Solidity в тестовой сети Rinkeby блокчейна Ethereum	AlexandreFrolov	DevOps,	2017-12-14
+59	Живой митап #RuPostgres: вопросы и ответы с экспертами Avito. Расшифровка прямого эфира	rafinirovannoe	Блог компании Avito,	2017-12-15
+60	Утренний дозор, или вступайте в радио-робингуды	itsar	Open source,	2017-12-16
+61	Иннополис глазами жителя Москвы	helena_sun	Блог компании InfoWatch,	2017-12-14
+62	Разработка через приемочные тесты (ATDD). Что это такое, и с чем его едят	micb	Анализ и проектирование систем,	2017-12-13
+63	Интернет вещей: Arduino в связке с облаком	sahsAGU	Блог компании Microsoft,	2017-12-13
+64	Как оживить картинку в браузере. Многопроходный рендеринг в WebGL	olegchir	Блог компании JUG.ru Group,	2017-12-18
+65	Интеллектуальные чат-боты на ChatScript: основы	ru_vds	Блог компании RUVDS.com,	2017-12-13
+66	Итальянская забастовка роботов	dm_wrike	Блог компании Wrike,	2017-12-13
+67	Дайджест свежих материалов из мира фронтенда за последнюю неделю №293 (11 — 17 декабря 2017)	alexzfort	Блог компании Zfort Group,	2017-12-18
+68	Туториал по Unreal Engine. Часть 2: Blueprints	PatientZero	Unreal Engine,	2017-12-14
+69	Задачки с ZeroNights 2017: стань королем капчи	Sberbank	Блог компании Сбербанк,	2017-12-15
+70	FZF. Нечеткий поиск или как быстро ставить npm пакеты и убивать процессы	zolotyh	Блог компании Wrike,	2017-12-15
+71	Avito iOS Winter Edition — видео, фото, слайды, отзывы	rafinirovannoe	Блог компании Avito,	2017-12-12
+72	Распознавание лиц. Создаем и примеряем маски	niklnd	Блог компании EPAM,	2017-12-12
+73	Учим машину разбираться в языках	sahsAGU	Блог компании Microsoft,	2017-12-15
+74	Битва за сетевой нейтралитет: история вопроса	VASExperts	Блог компании VAS Experts,	2017-12-13
+75	Фэйковый дизайн	rishat_edison	Блог компании Edison,	2017-12-13
+76	Расширение моделей в Eloquent ORM	ZloAdmin	Laravel,	2017-12-14
+77	Рекомендации по установке СУБД InterSystems Caché в продуктовом режиме	SergeyMi	Блог компании InterSystems,	2017-12-14
+78	Снятся ли IT-рекрутерам круглые канализационные люки?	waterstream	Блог компании «Альфа-Банк»,	2017-12-15
+79	Multi-pattern matching на GPU миф или реальность	feel_OS_off	GPGPU,	2017-12-18
+80	Дайджест интересных материалов для мобильного разработчика #234 (11 декабря — 17 декабря)	EverydayTools	Блог компании Everyday Tools,	2017-12-17
+81	Как я стала тестировщиком. Спойлер: не сразу	ekaterinans	Блог компании Яндекс.Деньги,	2017-12-15
+82	Опубликованы результаты опроса по использованию javascript-технологий «The state of JavaScript 2017»	varanio	CSS,	2017-12-13
+83	Язык Lua и Corona SDK (3/3 часть)	exe_com	Lua,	2017-12-13
+84	Не поддавайтесь хайпу, или почему цена биткоина не отражает его реальной ценности	EverydayTools	Блог компании Everyday Tools,	2017-12-12
+85	Туториал по Unreal Engine. Часть 1: знакомство с движком	PatientZero	Unreal Engine,	2017-12-12
+86	Как сегментировать пользователей для разных вертикалей	Olga_Kovalieva	Блог компании Mobio,	2017-12-12
+87	Как подружить Skype и прокси	yosemity	Системное администрирование,	2017-12-16
+88	Виртуальные ядерные установки: полный цикл разработки для Oculus Rift в одном лице	bignucleargenius	CGI (графика),	2017-12-13
+89	Preview документов в программе на Python	sshmakov	Python,	2017-12-16
+90	Как рендерит кадр движок Metal Gear Solid V: Phantom Pain	PatientZero	Обработка изображений,	2017-12-18
+91	Почтовые ящики, которые и не ящики вовсе…	eao197	C++,	2017-12-13
+92	Приглашаем на Рождественский Agile MeetUp	Raiffeisenbank	Блог компании Райффайзенбанк,	2017-12-12
+93	Модульная сетка макета с нуля: анализ, расчет и построение	ilya-ivanov	Веб-дизайн,	2017-12-17
+94	Блокчейн 101: книги, исследования и статьи по теме	alinatestova	Блог компании Bitfury Group,	2017-12-13
+95	Паттерн передачи scala.concurrent.Promise в актор: особенности использования и альтернативы	evis_dev	Scala,	2017-12-14
+96	Как быть тимлидом, если работаешь с людьми из разных продуктовых команд	Kommunikator	Блог компании Туту.ру,	2017-12-15
+97	История о том, как П и Х игру «поделили»	HotWaterMusic	Разработка игр,	2017-12-14
+98	Проблемы локализации iOS и macOS	debug45	Usability,	2017-12-14
+99	WebRTC: как два браузера договариваются о голосовых и видеозвонках	eyeofhell	Блог компании Voximplant,	2017-12-18
+100	Как из UML диаграммы получить каркас Vue.js приложения	yarkov	JavaScript,	2017-12-15
+\.
+
+
+--
+-- Name: articles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kirill
+--
+
+SELECT pg_catalog.setval('articles_id_seq', 100, true);
+
+
+--
+-- Data for Name: authors; Type: TABLE DATA; Schema: public; Owner: kirill
+--
+
+COPY authors (id, name) FROM stdin;
+1	MagisterLudi
+2	SergioPredatore
+3	terrib1ekeyn
+4	swh
+5	PatientZero
+6	BarakAdama
+7	Shapelez
+8	AloneCoder
+9	nmivan
+10	Shumina
+11	Pvashkevich
+12	shurik2533
+13	larrabee
+14	rishat_edison
+15	khandeliants
+16	AnIvanov
+17	mviorno
+18	SendMess
+19	friifond
+20	specblog
+21	Shpankov
+22	vryashentsev
+23	Cloud4Y
+24	Leono
+25	nosterx
+26	zarytskiy
+27	Bel0g0r
+28	Andrey2008
+29	Logomachine
+30	MEGA_Accelerator
+31	Gerente_Capaz
+32	alconost
+33	diiina
+34	little-brother
+35	nnseva
+36	sidristij
+37	distol
+38	SolarSecurity
+39	phillennium
+40	SmartEngines
+41	Drag13
+42	Cheburator2033
+43	ru_vds
+44	23derevo
+45	befuddle
+46	Nikishkin
+47	Axelus
+48	temujin
+49	KAIIIAJIOT
+50	AlexandreFrolov
+51	rafinirovannoe
+52	itsar
+53	helena_sun
+54	micb
+55	sahsAGU
+56	olegchir
+57	dm_wrike
+58	alexzfort
+59	Sberbank
+60	zolotyh
+61	niklnd
+62	VASExperts
+63	ZloAdmin
+64	SergeyMi
+65	waterstream
+66	feel_OS_off
+67	EverydayTools
+68	ekaterinans
+69	varanio
+70	exe_com
+71	Olga_Kovalieva
+72	yosemity
+73	bignucleargenius
+74	sshmakov
+75	eao197
+76	Raiffeisenbank
+77	ilya-ivanov
+78	alinatestova
+79	evis_dev
+80	Kommunikator
+81	HotWaterMusic
+82	debug45
+83	eyeofhell
+84	yarkov
+\.
+
+
+--
+-- Name: authors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kirill
+--
+
+SELECT pg_catalog.setval('authors_id_seq', 84, true);
+
+
+--
+-- Data for Name: hubs; Type: TABLE DATA; Schema: public; Owner: kirill
+--
+
+COPY hubs (id, name) FROM stdin;
+1	Разработка под iOS
+2	Разработка под Android
+3	Программирование
+4	Карьера в IT-индустрии
+5	Блог компании Philtech-акселератор
+6	Управление персоналом
+7	Анализ и проектирование систем
+8	1С-Битрикс
+9	Разработка игр
+10	Разработка под Windows
+11	Криптография
+12	Информационная безопасность
+13	Браузеры
+14	Блог компании Яндекс
+15	Математика
+16	Системное администрирование
+17	Сетевые технологии
+18	Децентрализованные сети
+19	Блог компании Qrator Labs
+20	Разработка веб-сайтов
+21	PHP
+22	Блог компании Mail.Ru Group
+23	Управление проектами
+24	Управление продуктом
+25	Бизнес-модели
+26	Учебный процесс в IT
+27	Конференции
+28	Контент-маркетинг
+29	Блог компании ГК ЛАНИТ
+30	IT-инфраструктура
+31	Блог компании КРОК
+32	Исследования и прогнозы в IT
+33	Визуализация данных
+34	Data Mining
+35	Блог компании HeadHunter
+36	IT-стандарты
+37	*nix
+38	Веб-дизайн
+39	CSS
+40	Блог компании Edison
+41	Компиляторы
+42	C++
+43	C
+44	Блог компании PVS-Studio
+45	.NET
+46	Блог компании DevExpress
+47	Assembler
+48	Развитие стартапа
+49	Монетизация веб-сервисов
+50	Блог компании Фонд развития интернет-инициатив
+51	Настройка Linux
+52	Блог компании Vivaldi Technologies AS
+53	Agile
+54	Читальный зал
+55	Открытые данные
+56	Веб-аналитика
+57	Блог компании Cloud4Y
+58	Хакатоны
+59	Спортивное программирование
+60	Машинное обучение
+61	API
+62	Графический дизайн
+63	Финансы в IT
+64	Контекстная реклама
+65	Законодательство и IT-бизнес
+66	Разработка под OS X
+67	Программирование микроконтроллеров
+68	Java
+69	Интернет-маркетинг
+70	Блог компании Логомашина
+71	Блог компании МЕГА Accelerator
+72	Медийная реклама
+73	Growth Hacking
+74	Управление разработкой
+75	Тестирование мобильных приложений
+76	Разработка мобильных приложений
+77	Блог компании Alconost
+78	SQL
+79	Python
+80	Open source
+81	Big Data
+82	Алгоритмы
+83	Nginx
+84	Lua
+85	C#
+86	DevOps
+87	Блог компании Флант
+88	SaaS / S+S
+89	Блог компании Solar Security
+90	JavaScript
+91	Блог компании JUG.ru Group
+92	Проектирование и рефакторинг
+93	Отладка
+94	Обработка изображений
+95	Блог компании Smart Engines
+96	Node.JS
+97	Microsoft Azure
+98	Блог компании Parallels
+99	Блог компании RUVDS.com
+100	Блог компании Open Data Science
+101	ReactJS
+102	Интерфейсы
+103	Блог компании Acronis, Inc
+104	ERP-системы
+105	CRM-системы
+106	Блог компании RegionSoft Developer Studio
+107	Системное программирование
+108	Разработка под Linux
+109	Блог компании Badoo
+110	Unreal Engine
+111	Разработка под e-commerce
+112	Solidity
+113	Хранилища данных
+114	Хранение данных
+115	Администрирование баз данных
+116	PostgreSQL
+117	Блог компании Avito
+118	Глобальные системы позиционирования
+119	Геоинформационные сервисы
+120	Беспроводные технологии
+121	Блог компании InfoWatch
+122	Тестирование IT-систем
+123	Разработка для интернета вещей
+124	Microsoft SQL Server
+125	Блог компании Microsoft
+126	WebGL
+127	Блог компании Wrike
+128	HTML
+129	Блог компании Zfort Group
+130	Блог компании Сбербанк
+131	Блог компании EPAM
+132	Блог компании VAS Experts
+133	Laravel
+134	Блог компании InterSystems
+135	Блог компании «Альфа-Банк»
+136	Реверс-инжиниринг
+137	GPGPU
+138	Блог компании Everyday Tools
+139	Фриланс
+140	Блог компании Яндекс.Деньги
+141	Платежные системы
+142	Монетизация мобильных приложений
+143	Аналитика мобильных приложений
+144	Блог компании Mobio
+145	Разработка под AR и VR
+146	Работа с 3D-графикой
+147	Unity3D
+148	CGI (графика)
+149	Qt
+150	Блог компании Райффайзенбанк
+151	Занимательные задачки
+152	Блог компании Bitfury Group
+153	Scala
+154	Блог компании Туту.ру
+155	Локализация продуктов
+156	Usability
+157	Блог компании Voximplant
+158	VueJS
+\.
+
+
+--
+-- Name: hubs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: kirill
+--
+
+SELECT pg_catalog.setval('hubs_id_seq', 158, true);
+
+
+--
+-- Name: articles articles_pkey; Type: CONSTRAINT; Schema: public; Owner: kirill
+--
+
+ALTER TABLE ONLY articles
+    ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: authors authors_pkey; Type: CONSTRAINT; Schema: public; Owner: kirill
+--
+
+ALTER TABLE ONLY authors
+    ADD CONSTRAINT authors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hubs hubs_pkey; Type: CONSTRAINT; Schema: public; Owner: kirill
+--
+
+ALTER TABLE ONLY hubs
+    ADD CONSTRAINT hubs_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
