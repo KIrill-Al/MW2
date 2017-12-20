@@ -88,7 +88,7 @@ def write_to_db(posts):
                 result = cursor.fetchall()
                 if int(result[0][0]) == 0: # если в таблице нет такого хаба, добавляем
                     cursor.execute("INSERT INTO hubs (name) VALUES ('{}');".format(hub))
-                hubs_str = '{},'.format(hub)  # формируем строку для записи в базу
+                hubs_str = '{}{},'.format(hubs_str, hub)  # формируем строку для записи в базу
             cursor.execute("INSERT INTO articles (title, author, hubs, date) \
             VALUES ('{}', '{}', '{}', '{}');".format(post['title'], post['author'], hubs_str, post['date']))
             conn.commit()
